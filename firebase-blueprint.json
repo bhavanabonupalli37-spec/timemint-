@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["Student", "Employee", "Freelancer", "Other"] },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "wakeUpTime": { "type": "string" },
+            "sleepTime": { "type": "string" },
+            "dailyGoals": { "type": "string" },
+            "preferredWorkHours": { "type": "string" },
+            "breakPreferences": { "type": "string" },
+            "exerciseTime": { "type": "string" },
+            "mealTimings": { "type": "string" },
+            "travelTime": { "type": "string" },
+            "freeTimePreferences": { "type": "string" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Timetable": {
+      "title": "Timetable",
+      "description": "Daily or repeatable schedule",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["daily", "weekly", "manual", "ai"] },
+        "activities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "start": { "type": "string" },
+              "end": { "type": "string" },
+              "category": { "type": "string" },
+              "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+              "completed": { "type": "boolean" }
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "activities"]
+    },
+    "AppStats": {
+      "title": "AppStats",
+      "description": "User productivity statistics",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "date": { "type": "string" },
+        "streak": { "type": "integer" },
+        "productivityScore": { "type": "number" },
+        "completedTasks": { "type": "integer" },
+        "totalTasks": { "type": "integer" }
+      },
+      "required": ["uid", "date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Store user profile documents"
+    },
+    "/users/{userId}/timetables/{timetableId}": {
+      "schema": "Timetable",
+      "description": "Store user timetables"
+    },
+    "/users/{userId}/stats/{statId}": {
+      "schema": "AppStats",
+      "description": "Store user daily productivity stats"
+    }
+  }
+}

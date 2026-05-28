@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Remix: TimeMint",
+  "description": "TimeMint: Design Your Perfect Day. An AI-powered productivity app for organized routines and smart timetable generation.",
+  "requestFramePermissions": [
+    "notifications"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
